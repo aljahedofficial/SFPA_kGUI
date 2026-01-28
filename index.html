@@ -1373,5 +1373,222 @@ The findings suggest that teachers should consider syntactic complexity when des
             });
         }
     </script>
+
+    <!-- Visualization Charts Section -->
+    <div class="container mx-auto p-6 space-y-6 mt-8">
+        <!-- Feature Distribution Chart -->
+        <div class="metric-card p-6 rounded-lg">
+            <h3 class="text-xl font-semibold mb-4 gradient-text">Feature Distribution Analysis</h3>
+            <div class="chart-wrapper">
+                <canvas id="featureDistChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Risk Assessment Chart -->
+        <div class="metric-card p-6 rounded-lg">
+            <h3 class="text-xl font-semibold mb-4 gradient-text">Risk Score Comparison</h3>
+            <div class="chart-wrapper">
+                <canvas id="riskChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Stylometric Patterns Chart -->
+        <div class="metric-card p-6 rounded-lg">
+            <h3 class="text-xl font-semibold mb-4 gradient-text">Stylometric Pattern Curves</h3>
+            <div class="chart-wrapper">
+                <canvas id="stylometricChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // Initialize visualization charts after DOM loads
+    document.addEventListener('DOMContentLoaded', function() {
+        // Feature Distribution Chart - Bar Chart
+        const featureCtx = document.getElementById('featureDistChart');
+        if (featureCtx) {
+            new Chart(featureCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Lexical', 'Syntactic', 'Semantic', 'Structural', 'Character-based'],
+                    datasets: [{
+                        label: 'Feature Count',
+                        data: [25, 18, 22, 30, 22],
+                        backgroundColor: [
+                            'rgba(0, 212, 255, 0.6)',
+                            'rgba(188, 19, 254, 0.6)',
+                            'rgba(0, 255, 136, 0.6)',
+                            'rgba(255, 170, 0, 0.6)',
+                            'rgba(255, 51, 102, 0.6)'
+                        ],
+                        borderColor: [
+                            'rgba(0, 212, 255, 1)',
+                            'rgba(188, 19, 254, 1)',
+                            'rgba(0, 255, 136, 1)',
+                            'rgba(255, 170, 0, 1)',
+                            'rgba(255, 51, 102, 1)'
+                        ],
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        title: {
+                            display: true,
+                            text: '117-Feature Stylometric Categories',
+                            color: '#e0e0e0'
+                        }
+                    },
+                    scales: {
+                        y: { 
+                            beginAtZero: true, 
+                            grid: { color: 'rgba(255,255,255,0.05)' },
+                            ticks: { color: '#e0e0e0' }
+                        },
+                        x: { 
+                            grid: { color: 'rgba(255,255,255,0.05)' },
+                            ticks: { color: '#e0e0e0' }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Risk Assessment Chart - Radar Chart
+        const riskCtx = document.getElementById('riskChart');
+        if (riskCtx) {
+            new Chart(riskCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['Consistency', 'Complexity', 'Uniqueness', 'Variability', 'Authenticity'],
+                    datasets: [{
+                        label: 'Document 1',
+                        data: [85, 72, 68, 90, 75],
+                        backgroundColor: 'rgba(0, 212, 255, 0.2)',
+                        borderColor: 'rgba(0, 212, 255, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(0, 212, 255, 1)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgba(0, 212, 255, 1)'
+                    }, {
+                        label: 'Document 2',
+                        data: [78, 85, 92, 65, 80],
+                        backgroundColor: 'rgba(188, 19, 254, 0.2)',
+                        borderColor: 'rgba(188, 19, 254, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(188, 19, 254, 1)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgba(188, 19, 254, 1)'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { 
+                            position: 'top',
+                            labels: { color: '#e0e0e0' }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Multi-Document Risk Profile Comparison',
+                            color: '#e0e0e0'
+                        }
+                    },
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 100,
+                            grid: { color: 'rgba(255,255,255,0.1)' },
+                            angleLines: { color: 'rgba(255,255,255,0.1)' },
+                            pointLabels: { color: '#e0e0e0', font: { size: 12 } },
+                            ticks: { 
+                                color: '#e0e0e0',
+                                backdropColor: 'transparent'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Stylometric Pattern Curves - Line Chart
+        const stylometricCtx = document.getElementById('stylometricChart');
+        if (stylometricCtx) {
+            new Chart(stylometricCtx, {
+                type: 'line',
+                data: {
+                    labels: ['0-20%', '20-40%', '40-60%', '60-80%', '80-100%'],
+                    datasets: [{
+                        label: 'Sentence Length Variance',
+                        data: [12, 19, 15, 25, 22],
+                        borderColor: 'rgba(0, 212, 255, 1)',
+                        backgroundColor: 'rgba(0, 212, 255, 0.1)',
+                        tension: 0.4,
+                        fill: true,
+                        borderWidth: 2,
+                        pointRadius: 4,
+                        pointHoverRadius: 6
+                    }, {
+                        label: 'Vocabulary Richness',
+                        data: [8, 15, 20, 28, 35],
+                        borderColor: 'rgba(188, 19, 254, 1)',
+                        backgroundColor: 'rgba(188, 19, 254, 0.1)',
+                        tension: 0.4,
+                        fill: true,
+                        borderWidth: 2,
+                        pointRadius: 4,
+                        pointHoverRadius: 6
+                    }, {
+                        label: 'Punctuation Density',
+                        data: [18, 22, 18, 15, 12],
+                        borderColor: 'rgba(0, 255, 136, 1)',
+                        backgroundColor: 'rgba(0, 255, 136, 0.1)',
+                        tension: 0.4,
+                        fill: true,
+                        borderWidth: 2,
+                        pointRadius: 4,
+                        pointHoverRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { 
+                            position: 'bottom',
+                            labels: { color: '#e0e0e0', padding: 15 }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Stylometric Feature Progression Across Document',
+                            color: '#e0e0e0'
+                        }
+                    },
+                    scales: {
+                        y: { 
+                            beginAtZero: true, 
+                            grid: { color: 'rgba(255,255,255,0.05)' },
+                            ticks: { color: '#e0e0e0' }
+                        },
+                        x: { 
+                            grid: { color: 'rgba(255,255,255,0.05)' },
+                            ticks: { color: '#e0e0e0' }
+                        }
+                    },
+                    interaction: {
+                        mode: 'index',
+                        intersect: false
+                    }
+                }
+            });
+        }
+    });
+    </script>
 </body>
 </html>
